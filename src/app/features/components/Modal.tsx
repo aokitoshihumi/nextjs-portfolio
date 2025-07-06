@@ -1,0 +1,114 @@
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Images } from "../types";
+
+type Props = {
+    selectedIndex: number | null;
+    setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
+    images: Images[];
+    onClose: () => void;
+}
+
+export default function Modal({ selectedIndex, setSelectedIndex, images, onClose }: Props) {
+    //selectedIndex
+    if (selectedIndex === null || selectedIndex === undefined) return null;
+
+    const selectedPhoto = images[selectedIndex];
+
+    const LastIndex = images.length;
+
+    const variants = {
+        hidden: {
+            opacity: 0.5,
+            scale: 0,
+        },
+        visible: {
+            opacity: 1,
+            scale: 1.2,
+            transition: {
+                type: "spring",
+                duration: 0.4,
+            },
+        },
+        exit: {
+            opacity: 0,
+            scale: 0.2,
+            transition: {
+                duration: 0.25,
+                type: "tween",
+                ease: [0.76, 0, 0.24, 1],
+            },
+        },
+    };
+
+    const PrevPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.stopPropagation()
+        const LastIndex = images.length - 1;
+        let prevIndex = selectedIndex - 1;
+        if (prevIndex <= 0) {
+            prevIndex = LastIndex;
+            setSelectedIndex(prevIndex)
+        } else {
+            setSelectedIndex(selectedIndex - 1)
+        }
+    }
+
+    //右ボタンを押すと + 1
+    const NextPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.stopPropagation()
+        const nextIndex = selectedIndex + 1;
+        if (nextIndex >= images.length) {
+            setSelectedIndex(0)
+        } else {
+            setSelectedIndex(nextIndex)
+        }
+    }
+
+    //images.length = 5
+    //selectedIndex = 5
+
+    //左ボタンを押すと - 1
+
+
+    return (
+        <>
+            <AnimatePresence>
+                <div
+                    onClick={onClose}
+                    className="fixed inset-0 z-50 bg-gray-400/50 flex justify-center items-center">
+                    <button
+                        onClick={PrevPhoto}
+                        className="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-5 shadow transition">
+                        &#8592;
+                    </button>
+                    <motion.div
+                        className="relative my-6 mx-auto max-w-full max-h-screen"
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+
+                            <Image
+                                className="w-full h-full max-w-screen max-h-screen object-contain"
+                                src={selectedPhoto.images.url}
+                                alt="photo"
+                                width={800}
+                                height={600}
+                                quality={100}
+                            />
+
+                        </div>
+                    </motion.div>
+                    <button
+                        onClick={NextPhoto}
+                        className="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-5 shadow transition"
+                    >
+                        &#8594;
+                    </button>
+                </div>
+            </AnimatePresence>
+        </>
+    )
+}

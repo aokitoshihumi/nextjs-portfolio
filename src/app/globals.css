@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+body {
+    background-color: rgba(240, 240, 240, 0.555);
+    font-family: "Yomogi", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.contents{
+    position: relative;
+}
+
+.content{
+    position: absolute;
+    right: 0;
+    bottom:0;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 95%;
+  max-height: 95%;
+  overflow: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+    img {
+    max-width: 1100px;
+    width: 100%;
+    height: auto;
+  }
+}

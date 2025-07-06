@@ -1,0 +1,34 @@
+useStateは非同期
+
+number型と呼び出しシグネチャ
+
+useState[selectedIndex, setSelectedIndex]
+set関数は動的に取得する形を扱うので以下文法を利用する。 
+React.Dispatch<React.SetStateAction<number | null>>;
+
+null型を定義するときには扱い方に注意を使用しよう。
+https://zenn.dev/terusi/articles/e243ead933d406
+変数やプロパティにnullを扱うときは、それらを適切に処理をしなければいけない。
+
+
+意識したこと
+
+画像の不均一
+
+ディレクトリ構造
+
+オブジェクト
+キーとバリューがペアになったもの
+
+useStateの挙動
+const [selected,SetSelected] = useState();
+かっこの中身は明示したほうがエラーになりにくい
+配列なら[]だし、文字列なら""
+SetSelectedは関数呼び出しによって、selectedの中身を書き換える
+
+map(item, index)
+indexで配列番号を管理できる。
+
+useStateのsetState()は非同期
+バッチ処理　useState
+https://sho03.hatenablog.com/entry/2021/11/28/114900
