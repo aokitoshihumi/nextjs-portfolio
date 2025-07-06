@@ -32,3 +32,6 @@ indexで配列番号を管理できる。
 useStateのsetState()は非同期
 バッチ処理　useState
 https://sho03.hatenablog.com/entry/2021/11/28/114900
+
+モーダルのデザイン（矢印のデザインを変える、クリッカブルにする）
+
