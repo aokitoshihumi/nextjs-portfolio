@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# memo
+memo
+
 # next.js
 /.next/
 /out/
