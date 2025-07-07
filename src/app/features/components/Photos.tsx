@@ -7,10 +7,10 @@ import Modal from "./Modal";
 import { Images } from "../types";
 
 type Props = {
-    images: Images[];
+  images: Images[];
 };
 
-export default function Photos ({ images }: Props) {
+export default function Photos({ images }: Props) {
   //モーダルのために選択されている画像という状態管理
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   //selectedPhoto今表示しているもの
@@ -24,7 +24,14 @@ export default function Photos ({ images }: Props) {
               key={image.id}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 200 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.1,
+                type: "spring",
+                stiffness: 200,
+              }}
+              initial={{ x: 400, y: 200, scale: 0 }}
+              animate={{ x: 0, y: 0, scale: 1 }}
               className="overflow-hidden rounded-lg break-inside-avoid"
             >
               <Image
@@ -36,10 +43,10 @@ export default function Photos ({ images }: Props) {
                 className="w-full h-auto rounded-lg object-cover"
               />
             </motion.div>
-            ))}
-          </div>
+          ))}
         </div>
-        <Modal 
+      </div>
+      <Modal
         onClose={() => setSelectedIndex(null)}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
@@ -47,4 +54,4 @@ export default function Photos ({ images }: Props) {
       />
     </>
   );
-};
+}
