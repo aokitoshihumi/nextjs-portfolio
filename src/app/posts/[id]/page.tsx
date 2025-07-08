@@ -2,15 +2,15 @@ import React from 'react'
 import { client } from '@/libs/client';
 
 type Props = {
-    params: {id: string};
+    params: Promise<{id: string}>;
 }
 
 export default async function BlogDetailsPage({params}: Props) {
-    const blogId = await params.id;
+    const {id} = await params;
 
     const data = await client.get({
       endpoint: "blogs",
-      contentId: blogId,
+      contentId: id,
     });
 
     return(

@@ -18,7 +18,6 @@ export default function Modal({
   //selectedIndex
   if (selectedIndex === null || selectedIndex === undefined) return null;
   const selectedPhoto = images[selectedIndex];
-  const LastIndex = images.length;
 
   const PrevPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
