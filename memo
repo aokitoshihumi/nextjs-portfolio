@@ -35,3 +35,45 @@ https://sho03.hatenablog.com/entry/2021/11/28/114900
 
 モーダルのデザイン（矢印のデザインを変える、クリッカブルにする）
 レンダリングの重たさをどうにかする。
+初回起動時とページ遷移がとても重たい
+
+paramsの型定義
+[id]でクリックされたブログの内容を表示する際にparams非同期ではPromiseでラップをしなければいけない
+間違いのコード
+type Props = {
+    params: {id: string};
+}
+正解のコード
+type Props = {
+    params: Primose<{id: string}>;
+}
+
+never型
+絶対に値が存在しないという事を表すための型
+
+ジェネリック型
+
+warning: in the working copy of 'src/app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tsconfig.json', LF will be replaced by CRLF the next time Git touches it
+gitをcommitやcheckoutする際に、LFな改行コードは自動的にCRLFに書き換えるという警告
+
+原因
+→npm run devだから？
+npm run devだと重くなるのは
+解決
+→
+
+Strict-Transport-Security
+webサイトがブラウザに対してHTTPSを使用することを強制するセキュリティ機能。
+参考にしたサイト
+https://zenn.dev/yutoo89/articles/d1ed72b821b2c0
+
+preloadはHTTPS強制のためセキュリティ的に強いが、申請に数か月かかる点があるため今回はつけない。
+
+
+
+
+カスタムHTTPヘッダーとは
+通常のHTTP通信に追加でつけるメタ情報（データのデータ）のこと。
+
+
