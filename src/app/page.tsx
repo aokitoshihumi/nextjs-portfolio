@@ -1,10 +1,8 @@
 import { client } from "@/libs/client";
 import Eyecatch from "./features/components/Eyecatch";
-import { Blog } from "./features/types";
 
-export default async function Home() {
-  //エンドポイントblogsを指定して非同期でデータをgetする。
-  const data = await client.get({ endpoint: "blogs"});
+const Home = async () => {
+  const data = await client.get({ endpoint: "blogs" });
 
   return (
     <>
@@ -14,6 +12,6 @@ export default async function Home() {
       </div>
     </>
   );
-}
+};
 
-
+export default Home;

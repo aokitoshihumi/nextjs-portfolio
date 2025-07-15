@@ -11,12 +11,12 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    console.error("ページ内エラー", error);
   }, [error]);
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
+      <h2>エラーが発生しました。</h2>
       <p>{error.message}</p>
       <button onClick={() => reset()}>Try again</button>
     </div>
