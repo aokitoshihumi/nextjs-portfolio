@@ -1,5 +1,6 @@
 import { client } from "@/libs/client";
 import Eyecatch from "./features/components/Eyecatch";
+import Link from "next/link";
 
 const Home = async () => {
   const data = await client.get({ endpoint: "blogs" });

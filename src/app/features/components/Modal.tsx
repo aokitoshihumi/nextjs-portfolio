@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Images } from "../types";
+import { A11y, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 type Props = {
   selectedIndex: number | null;
@@ -15,71 +20,49 @@ export default function Modal({
   images,
   onClose,
 }: Props) {
-  //selectedIndex
-  if (selectedIndex === null || selectedIndex === undefined) return null;
-  const selectedPhoto = images[selectedIndex];
-
-  const PrevPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    const LastIndex = images.length - 1;
-    let prevIndex = selectedIndex - 1;
-    if (prevIndex <= 0) {
-      prevIndex = LastIndex;
-      setSelectedIndex(prevIndex);
-    } else {
-      setSelectedIndex(selectedIndex - 1);
-    }
-  };
-
-  //右ボタンを押すと + 1
-  const NextPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    const nextIndex = selectedIndex + 1;
-    if (nextIndex >= images.length) {
-      setSelectedIndex(0);
-    } else {
-      setSelectedIndex(nextIndex);
-    }
-  };
+  if (selectedIndex === null) return null;
 
   return (
-    <>
-      <div
-        onClick={onClose}
-        className="fixed inset-0 z-50 bg-gray-400/50 flex justify-center items-center"
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 bg-gray-400/50 flex justify-center items-center"
+    >
+      <motion.div
+        className="relative my-6 mx-auto max-w-full max-h-screen w-[90vw] h-[90vh]"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
       >
         <button
-          onClick={PrevPhoto}
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white text-3xl font-bold w-10 h-24 flex items-center justify-center shadow-md transition rounded-md"
+          onClick={onClose}
+          className="absolute top-4 right-4 z-50 text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center text-xl transition"
+          aria-label="Close"
         >
-          &lt;
+          &times;
         </button>
-        <motion.div
-          className="relative my-6 mx-auto max-w-full max-h-screen"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          onClick={(e) => e.stopPropagation()}
+        <Swiper
+          modules={[Navigation, A11y]}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          initialSlide={selectedIndex}
+          onSlideChange={(swiper) => setSelectedIndex(swiper.activeIndex)}
         >
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <Image
-              key={selectedPhoto.id}
-              className="w-full h-full max-w-screen max-h-screen object-contain"
-              src={selectedPhoto.images.url}
-              alt="photo"
-              height={800}
-              width={600}
-              quality={80}
-            />
-          </div>
-        </motion.div>
-        <button
-          onClick={NextPhoto}
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white text-3xl font-bold w-10 h-24 flex items-center justify-center shadow-md transition rounded-md"
-        >
-          &gt;
-        </button>
-      </div>
-    </>
+          {images.map((photo, index) => (
+            <SwiperSlide key={photo.id}>
+              <div className="relative w-full h-[80vh]">
+                <Image
+                  src={photo.images.url}
+                  alt={`photo-${index}`}
+                  fill
+                  className="object-contain"
+                  quality={80}
+                  onClick={(e) => e.stopPropagation}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </motion.div>
+    </div>
   );
 }
