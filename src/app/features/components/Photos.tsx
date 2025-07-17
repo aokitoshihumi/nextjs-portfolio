@@ -15,6 +15,7 @@ export default function Photos({ images }: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   //selectedPhoto今表示しているもの
   //今表示しているもの前と後を更新する関数
+  console.log(images);
   return (
     <>
       <div className="mx-auto max-w-7xl px-4">

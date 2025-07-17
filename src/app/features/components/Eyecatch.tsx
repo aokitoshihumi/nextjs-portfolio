@@ -13,7 +13,6 @@ export default function Eyecatch({ blogs }: Props) {
   return (
     <>
       <motion.div
-        className="{style.box}"
         initial={{ x: 400, y: 200, scale: 0 }}
         animate={{ x: 0, y: 0, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.1, type: "spring", bounce: 0.3 }}

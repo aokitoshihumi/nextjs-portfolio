@@ -44,7 +44,7 @@ export default function Modal({
           modules={[Navigation, A11y]}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          initialSlide={selectedIndex}
+          initialSlide={selectedIndex}//
           onSlideChange={(swiper) => setSelectedIndex(swiper.activeIndex)}
         >
           {images.map((photo, index) => (

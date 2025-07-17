@@ -12,9 +12,6 @@ export default function Header() {
               TgIf
             </Link>
           </div>
-          <Link href="/posts/Photos" className="ml-3 text-xl">
-            写真
-          </Link>
         </div>
       </header>
     </>
