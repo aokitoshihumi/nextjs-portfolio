@@ -24,8 +24,10 @@ export default function RootLayout({
       <body
         className={`${geistYomogi.className} antialiased`}
       >
+        <div className="bg-ground">
         <Header />
         {children}
+        </div>
       </body>
     </html>
   );

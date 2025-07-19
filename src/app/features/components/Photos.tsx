@@ -15,44 +15,41 @@ export default function Photos({ images }: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   //selectedPhoto今表示しているもの
   //今表示しているもの前と後を更新する関数
-  console.log(images);
   return (
     <>
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4 space-y-4">
-          {images.map((image, index) => (
-            <motion.div
-              key={image.id}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{
-                duration: 0.6,
-                delay: 0.1,
-                type: "spring",
-                bounce: 0.3,
-              }}
-              initial={{ x: 400, y: 200, scale: 0 }}
-              animate={{ x: 0, y: 0, scale: 1 }}
-              className="overflow-hidden rounded-lg break-inside-avoid"
-            >
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+        {images.map((image, index) => (
+          <motion.div
+            key={image.id}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.1,
+              type: "spring",
+              bounce: 0.3,
+            }}
+            initial={{ x: 400, y: 200, scale: 0 }}
+            animate={{ x: 0, y: 0, scale: 1 }}
+            className="rounded-lg"
+          >
               <Image
                 onClick={() => setSelectedIndex(index)}
                 src={image.images.url}
                 alt={image.images.alt || "写真"}
-                width={600}
-                height={400}
-                className="w-full h-auto rounded-lg object-cover"
+                width={400}
+                height={300}
+                className="w-full rounded-lg mb-4 object-cover"
               />
-            </motion.div>
-          ))}
-        </div>
+          </motion.div>
+        ))}
+        <Modal
+          onClose={() => setSelectedIndex(null)}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+          images={images}
+        />
       </div>
-      <Modal
-        onClose={() => setSelectedIndex(null)}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-        images={images}
-      />
     </>
   );
 }

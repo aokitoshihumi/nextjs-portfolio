@@ -12,5 +12,7 @@ export type Images = {
     images: {
         url: string;
         alt?: string;
+        width: number;
+        height: number;
     }
 }
