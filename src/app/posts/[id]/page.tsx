@@ -5,14 +5,17 @@ import rehypeSanitize from "rehype-sanitize";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+type Props = {
+  params: Promise<{ id : string }>
+}
 
-const BlogDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const resolvePrams = params.id;
+const BlogDetailsPage = async ({ params }: Props) => {
+  const { id } = await params;
   
   //外部からの通信の時だけawaitが必要。
   const data = await client.get({
     endpoint: "blogs",
-    contentId: resolvePrams,
+    contentId: id,
   });
 
   return (
