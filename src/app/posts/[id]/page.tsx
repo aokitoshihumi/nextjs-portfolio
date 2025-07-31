@@ -21,13 +21,11 @@ const BlogDetailsPage = async ({ params }: Props) => {
 
   return (
     <>
-      <main className="p-10">
+      <main className="p-10 markdown text-center">
         <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
-        <div className="markdown text-center">
           <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm, rehypeSanitize]}>
             {data.content}
           </ReactMarkdown>
-        </div>
       </main>
     </>
   );
