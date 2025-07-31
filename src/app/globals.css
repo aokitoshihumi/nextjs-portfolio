@@ -55,3 +55,8 @@ body {
     height: auto;
   }
 }
+
+.markdown img {
+  display: block;
+  margin: 0 auto;
+}
